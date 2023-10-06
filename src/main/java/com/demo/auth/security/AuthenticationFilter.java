@@ -1,5 +1,6 @@
 package com.demo.auth.security;
 
+import com.demo.auth.jwt.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,6 +19,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
   
   private static final String BEARER = "Bearer ";
   
+  private TokenService tokenService;
+  
   @Override
   protected void doFilterInternal(
       @NonNull HttpServletRequest request,
@@ -32,7 +35,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
       return;
     }
   
-    // token is located after 'Bearer '
-    String jwt = authorizationHeader.substring(BEARER.length());
+    // JWT token is located after 'Bearer '
+    String token = authorizationHeader.substring(BEARER.length());
+    String email = tokenService.getUsername(token);
   }
 }
