@@ -1,5 +1,6 @@
-package com.demo.auth.security;
+package com.demo.auth.config;
 
+import com.demo.auth.security.AuthenticationFilter;
 import com.demo.auth.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +13,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,9 +26,7 @@ public class SecurityConfig {
   
   private final AuthenticationFilter authenticationFilter;
   
-  private final AuthenticationProvider authenticationProvider;
-  
-  private final AppUserDetailsService appUserDetailsService;
+  private final UserRepository userRepository;
   
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -42,7 +42,7 @@ public class SecurityConfig {
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
-        .authenticationProvider(authenticationProvider)
+        .authenticationProvider(authenticationProvider())
         .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class);
     
     return http.build();
@@ -51,9 +51,15 @@ public class SecurityConfig {
   @Bean
   public AuthenticationProvider authenticationProvider() {
     DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-    authProvider.setUserDetailsService(appUserDetailsService);
+    authProvider.setUserDetailsService(userDetailsService());
     authProvider.setPasswordEncoder(passwordEncoder());
     return authProvider;
+  }
+  
+  @Bean
+  public UserDetailsService userDetailsService() {
+    return username -> userRepository.findByEmail(username)
+        .orElseThrow(() -> new UsernameNotFoundException("User " + username + "not found!"));
   }
   
   @Bean
