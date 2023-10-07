@@ -1,4 +1,4 @@
-package com.demo.auth;
+package com.demo.auth.service;
 
 import com.demo.auth.dto.AuthResponseDto;
 import com.demo.auth.dto.UserLoginRequestDto;
