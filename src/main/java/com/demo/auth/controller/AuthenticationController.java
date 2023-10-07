@@ -4,7 +4,6 @@ import com.demo.auth.dto.AuthResponseDto;
 import com.demo.auth.dto.UserLoginRequestDto;
 import com.demo.auth.dto.UserRegisterRequestDto;
 import com.demo.auth.service.AuthenticationService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
