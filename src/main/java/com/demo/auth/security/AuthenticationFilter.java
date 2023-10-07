@@ -24,9 +24,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
   
   private static final String BEARER = "Bearer ";
   
-  private TokenService tokenService;
+  private final TokenService tokenService;
   
-  private UserDetailsService userDetailsService;
+  private final UserDetailsService userDetailsService;
   
   @Override
   protected void doFilterInternal(

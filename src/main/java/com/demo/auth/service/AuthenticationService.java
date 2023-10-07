@@ -7,13 +7,11 @@ import com.demo.auth.exception.UserNotFoundException;
 import com.demo.auth.jwt.TokenService;
 import com.demo.auth.mapper.UserMapper;
 import com.demo.auth.user.User;
-import com.demo.auth.user.UserRepository;
+import com.demo.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor

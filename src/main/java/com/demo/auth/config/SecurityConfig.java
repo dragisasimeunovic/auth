@@ -1,7 +1,7 @@
 package com.demo.auth.config;
 
 import com.demo.auth.security.AuthenticationFilter;
-import com.demo.auth.user.UserRepository;
+import com.demo.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
