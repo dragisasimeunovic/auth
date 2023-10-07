@@ -46,7 +46,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     String email = tokenService.getUsername(token);
     // authenticate user if it's not authenticated
     if (!isUserAuthenticated(email)) {
-      UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+      UserDetails userDetails = this.userDetailsService.loadUserByUsername(email);
       // if token is valid, create authentication token and put it into security context
       if (tokenService.isTokenValid(token, userDetails)) {
         UsernamePasswordAuthenticationToken authenticationToken =
