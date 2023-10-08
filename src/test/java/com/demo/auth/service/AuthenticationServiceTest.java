@@ -6,7 +6,6 @@ import com.demo.auth.dto.UserRegisterRequestDto;
 import com.demo.auth.jwt.TokenService;
 import com.demo.auth.mapper.UserMapper;
 import com.demo.auth.repository.UserRepository;
-import com.demo.auth.service.AuthenticationService;
 import com.demo.auth.user.User;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

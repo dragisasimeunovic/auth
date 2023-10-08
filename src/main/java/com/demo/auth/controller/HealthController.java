@@ -8,6 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class HealthController {
   
+  /**
+   * Checks the health of the server.
+   *
+   * @return A string message indicating that the server is up and running.
+   */
   @GetMapping("/health")
   public String health() {
     return "Server is up and running!";
